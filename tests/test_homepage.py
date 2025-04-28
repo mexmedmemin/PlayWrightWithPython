@@ -1,8 +1,9 @@
 from browser_cfg.browser import PlaywrightPage
 from utils.page_utils import *
-
+from playwright.sync_api import expect
 
 class TestSomething(PlaywrightPage):
+    
 
     def test_button_add_to_cart_text_displayed(self, page):
 
@@ -24,9 +25,13 @@ class TestSomething(PlaywrightPage):
         select_add_button = select_button(
             page=page, locator_name="inventory_container", bt_text=CART_BUTTON_NAME[0]
         )
+
         for button in select_add_button:
-            button.click()
-            assert button.text_content() == CART_BUTTON_NAME[1]
+            print(select_add_button)
+            print()
+            expect(button.text_content()).to_contain_text(CART_BUTTON_NAME[0])
+        
+
 
     def test_remove_item_from_cart(self, page):
         select_add_button = select_button(

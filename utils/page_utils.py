@@ -1,8 +1,10 @@
+
+from typing import List
+
 CART_BUTTON_NAME = ["Add to cart", "Remove"]
 
-
-def select_button(page, locator_name: str, bt_text: CART_BUTTON_NAME):
-    locator_area = page.locator(f"#{locator_name}")
+def select_button(page, locator_name: str, bt_text: str):
+    locator_area = page.locator(locator_name)
     filtering_elements = locator_area.locator("*", has_text=f"{bt_text}")
     return filtering_elements.get_by_role("button").all()
 
